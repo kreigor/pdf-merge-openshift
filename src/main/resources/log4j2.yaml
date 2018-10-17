@@ -1,0 +1,32 @@
+Configutation:
+  name: Default
+
+  Properties:
+    Property:
+    - name: consolePatternLayout
+      value: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %logger{36} - %msg%n%throwable{full}"
+  Appenders:
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: ${consolePatternLayout}
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+      - ref: Console_Appender
+
+    Logger:
+    - name: io.kreiger.pdfmerge
+      level: info
+
+    - name: org.springframework.web
+      level: info
+
+    - name: org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping
+      level: info
+
+    - name: org.thymeleaf
+      level: info
