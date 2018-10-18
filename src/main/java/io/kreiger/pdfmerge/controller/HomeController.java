@@ -77,8 +77,16 @@ public class HomeController {
 
         mav.setView(new PdfMergeView());
 
+        String clientIP;
+
+        if(request.getHeader("X-Forwarded-For") != null) {
+            clientIP = request.getHeader("X-Forwarded-For");
+        } else {
+            clientIP = request.getRemoteAddr();
+        }
+
         try {
-            logger.info("PDF Merge started for: " + request.getRemoteAddr() + " (" + request.getRemoteHost() + ")");
+            logger.info("PDF Merge started for: " + clientIP);
 
             pdfMerge.setPath(pathTemp);
             pdfMerge.setDirectory(session.getId());
