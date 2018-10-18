@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Merge Error</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/error/error.css">
+</head>
+<body marginwidth="0" marginheight="0">
+<div id="block_error">
+    <div>
+        <h1>Error <span th:text="${statusCode}">???</span></h1>
+        <h2>&nbspOops you've have encountered an error</h2>
+        <p class="error" th:text="${errorMessage}">Error</p>
+        <p>
+            Request URI: <span th:text="${errorRequestURI}"></span>
+        </p>
+        <p>
+            Either something went wrong or the page doesn't exist anymore.
+        </p>
+        <p>
+            If you have any questions, please contact our Technical Support department.
+        </p>
+        <p>
+            <a href="/">Return Home</a>
+        </p>
+    </div>
+</div>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

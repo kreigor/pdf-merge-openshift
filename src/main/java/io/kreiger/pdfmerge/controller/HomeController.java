@@ -1,4 +1,4 @@
-package io.kreiger.pdfmerge.home.controller;
+package io.kreiger.pdfmerge.controller;
 
 import io.kreiger.pdfmerge.component.Directory;
 import io.kreiger.pdfmerge.component.MultipartFileUpload;
@@ -49,12 +49,12 @@ public class HomeController {
     }
 
     @PostMapping("")
-    public void postMerge(@RequestParam MultipartFile file, HttpServletResponse response, @Autowired Directory directory, @Autowired MultipartFileUpload mfu) throws Exception {
+    public void postMerge(@RequestParam MultipartFile file, HttpServletResponse response, @Autowired Directory directory, @Autowired MultipartFileUpload mfu, HttpSession session) throws Exception {
         boolean uploadSuccess;
         String uploadPath;
 
         directory.setPath(pathTemp);
-        directory.setDirectoryName(this.uuid.toString());
+        directory.setDirectoryName(session.getId());
 
         if(!directory.exists()) {
             directory.createDirectory();
@@ -72,16 +72,16 @@ public class HomeController {
     }
 
     @PostMapping("/download")
-    public ModelAndView postDownload(ModelAndView mav, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public ModelAndView postDownload(ModelAndView mav, HttpServletRequest request, HttpSession session) {
         List<InputStream> fileList;
 
         mav.setView(new PdfMergeView());
 
         try {
-            logger.info("PDF Merge started for: " + request.getRemoteAddr() + " (" + request.getRemoteHost() + ")" + session.getId());
+            logger.info("PDF Merge started for: " + request.getRemoteAddr() + " (" + request.getRemoteHost() + ")");
 
             pdfMerge.setPath(pathTemp);
-            pdfMerge.setDirectory(this.uuid.toString());
+            pdfMerge.setDirectory(session.getId());
             fileList = pdfMerge.sortFiles();
             pdfMerge.fileCleanup();
 
@@ -93,7 +93,7 @@ public class HomeController {
             mav.addObject("fileType", "Attachment");
             mav.addObject("fileName", "Merged.pdf");
             mav.addObject("appName", this.appName);
-            mav.addObject("AppVer", this.appVer);
+            mav.addObject("appVer", this.appVer);
         } catch (Exception ex) {
             logger.trace(ex);
         } finally {

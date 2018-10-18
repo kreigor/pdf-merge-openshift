@@ -40,9 +40,10 @@
         <div class="container">
             <h1 class="display-3" th:text="#{greeting}">Hello World!</h1>
 
-            <p>You can drag and drop files to the area below or click on the area below to select the files from your computer.</p>
-            <p>Once all files have a green check mark you can click the Merge button.</p>
-            <p>When complete the merged file will be downloaded to your computer.</p>
+            <p>You can drag and drop files to the area below or click on the area below to select the files from your computer.<br />
+               Once all files have a green check mark you can click the Merge button.<br />
+               When complete the merged file will be downloaded to your computer.
+            </p>
             <form action="/" class="dropzone" id="pdfMerge"></form>
             <p></p>
             <form action="/download" method="post">
@@ -64,5 +65,6 @@
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/dropzone.js"></script>
+<script src="js/home/home.js"></script>
 </body>
 </html>

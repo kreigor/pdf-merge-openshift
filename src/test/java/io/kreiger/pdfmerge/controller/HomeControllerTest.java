@@ -1,4 +1,4 @@
-package io.kreiger.pdfmerge.home.controller;
+package io.kreiger.pdfmerge.controller;
 
 import org.junit.Before;
 import org.junit.Test;
